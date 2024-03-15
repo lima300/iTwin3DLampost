@@ -86,6 +86,7 @@ const MarkerPinWidget = () => {
   );
 
   useEffect(() => {
+    const points: Point3d[] = [];
     addGraphicToDecorators().then(() => {
       coordinates.coordinates.forEach(({ x, y, z }) => {
         const point = new Point3d(x, y, z);
@@ -98,8 +99,9 @@ const MarkerPinWidget = () => {
           )
         );
         placedGraphicDecorator?.addPlacedGraphic(transform);
-        setPointsState([...pointsState, point]);
+        points.push(point);
       });
+      setPointsState(points);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addGraphicToDecorators, placedGraphicDecorator, viewport]);
